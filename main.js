@@ -119,13 +119,12 @@ module.exports = class VisualConceptLab extends Plugin {
     async loadLocale() {
         const lang = this.settings.language || 'en';
         try {
-            const path = require('path');
-            const fs = require('fs');
-            const basePath = this.app.vault.adapter.getBasePath();
-            const filePath = path.join(basePath, this.app.vault.configDir, 'plugins', 'shuffle-lab', 'lang', lang + '.json');
-            const content = fs.readFileSync(filePath, 'utf-8');
-            this.locale = JSON.parse(content);
-            return;
+            const adapter = this.app.vault.adapter;
+            const filePath = this.app.vault.configDir + '/plugins/shuffle-lab/lang/' + lang + '.json';
+            if (await adapter.exists(filePath)) {
+                this.locale = JSON.parse(await adapter.read(filePath));
+                return;
+            }
         } catch (e) {}
 
         this.locale = Object.assign({}, FALLBACK_LOCALE);
@@ -157,16 +156,11 @@ module.exports = class VisualConceptLab extends Plugin {
     }
 
     openLanguageFolder() {
-        if (!Platform.isDesktop) {
-            new Notice('Cannot open folder on this device');
-            return;
-        }
         try {
-            const path = require('path');
-            const { exec } = require('child_process');
+            const { shell } = require('electron');
             const basePath = this.app.vault.adapter.getBasePath();
-            const langDir = path.join(basePath, this.app.vault.configDir, 'plugins', 'shuffle-lab', 'lang');
-            exec(`explorer.exe "${langDir}"`);
+            const langDir = basePath + '/' + this.app.vault.configDir + '/plugins/shuffle-lab/lang';
+            shell.openPath(langDir);
         } catch (e) {
             new Notice('Cannot open folder on this device');
         }
