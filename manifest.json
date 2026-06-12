@@ -1,0 +1,10 @@
+{
+    "id": "shuffle-lab",
+    "name": "Shuffle Lab",
+    "version": "1.0.0",
+    "minAppVersion": "1.0.0",
+    "description": "Timed, randomized fullscreen image slideshows for presentations, games, drawing sessions, and more. By Mars Marcelyn.",
+    "author": "Mars Marcelyn",
+    "authorUrl": "",
+    "isDesktopOnly": true
+}
