@@ -29,8 +29,8 @@ Copy `main.js`, `manifest.json`, and `styles.css` to `.obsidian/plugins/shuffle-
 
 ## Localization (desktop only)
 
-1. Open **Settings → Shuffle Lab** and click **Open folder** next to "Language files".
-2. Copy `en.json` from the `lang/` folder, rename it to your language code (e.g. `de.json`).
+1. Navigate to your vault's `.obsidian/plugins/shuffle-lab/lang/` folder.
+2. Copy `en.json`, rename it to your language code (e.g. `de.json`).
 3. Translate all values (the text after the colons). Keep keys, `{0}` placeholders, and `\n` unchanged.
 4. Reload Obsidian, then select your language in **Settings → Shuffle Lab**.
 

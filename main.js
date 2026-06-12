@@ -155,17 +155,6 @@ module.exports = class VisualConceptLab extends Plugin {
         return this._cachedLanguages || [['en', 'English']];
     }
 
-    openLanguageFolder() {
-        try {
-            const { shell } = require('electron');
-            const basePath = this.app.vault.adapter.getBasePath();
-            const langDir = basePath + '/' + this.app.vault.configDir + '/plugins/shuffle-lab/lang';
-            shell.openPath(langDir);
-        } catch (e) {
-            new Notice('Cannot open folder on this device');
-        }
-    }
-
     t(key, ...args) {
         const parts = key.split('.');
         let value = this.locale;
@@ -230,12 +219,6 @@ class DrawingSessionSettingTab extends PluginSettingTab {
                 cls: 'shuffle-lab-lang-warning shuffle-lab-is-hidden'
             });
 
-            new Setting(containerEl)
-                .setName(this.plugin.t('languageFilesName'))
-                .setDesc(this.plugin.t('languageFilesDesc'))
-                .addButton(button => button
-                    .setButtonText(this.plugin.t('openFolderBtn'))
-                    .onClick(() => this.plugin.openLanguageFolder()));
         }
 
     }
